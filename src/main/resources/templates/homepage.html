@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/templates/css/custom.css" >
+
+
+	<title>Homepage</title>
+</head>
+
+
+<body>
+<div class="container">
+    <h2>Diplomas Management App</h2>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="#">
+                <h1>Create Account</h1>
+
+                <span>or use your username for registration</span>
+                <input type="text" placeholder="Name" />
+                <input type="username" placeholder="Username" />
+                <input type="password" placeholder="Password" />
+                <button>Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="#">
+                <h1>Sign in</h1>
+                <span>or use your account</span>
+                <input type="username" placeholder="Username" />
+                <input type="password" placeholder="Password" />
+                <a href="#">Forgot your password?</a>
+                <button>Sign In</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal details and start journey with us</p>
+                    <button class="ghost" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+ 
+ <br> <br> <hr> <br> <br>
+ 
+  <div sec:authorize="hasRole('ROLE_ANONYMOUS')">
+    <p>
+    	<a th:href="@{/login}" class="btn btn-primary btn-sm mb-3" th:text="Login"></a>
+    	<a th:href="@{/register}" class="btn btn-primary btn-sm mb-3" th:text="Register"></a>
+    </p>
+  </div>
+
+  <div sec:authorize="isAuthenticated()">
+    <h4>Logged as: <span sec:authentication="name"></span></h4>
+    <h4>Has role: <span sec:authentication="authorities"></span></h4>
+    
+    <br> <br> <hr> <br> <br>
+    
+    <p sec:authorize="hasAuthority('Student')">
+    	<a th:href="@{/student/dashboard}" class="btn btn-primary btn-sm mb-3"> Student Dashboard</a>
+    	<a th:href="@{/logout}" class="btn btn-danger"> Logout</a>
+    </p>
+    
+    <p sec:authorize="hasAuthority('Profesor')">
+    	<a th:href="@{/professor/dashboard}" class="btn btn-primary btn-sm mb-3"> Professor Dashboard</a>
+    	<a th:href="@{/logout}" class="btn btn-danger"> Logout</a>
+    </p>
+
+  </div></div>
+</body>
+</html>
