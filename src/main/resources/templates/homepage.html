@@ -1,92 +1,60 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-
+<html>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/templates/css/custom.css" >
-
-
-	<title>Homepage</title>
+    <meta charset="UTF-8">
+    <title>Diplomas Management App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
-
-
 <body>
-<div class="container">
-    <h2>Diplomas Management App</h2>
-    <div class="container" id="container">
-        <div class="form-container sign-up-container">
-            <form action="#">
-                <h1>Create Account</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Diplomas Management App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/login}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/register}">Register</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-                <span>or use your username for registration</span>
-                <input type="text" placeholder="Name" />
-                <input type="username" placeholder="Username" />
-                <input type="password" placeholder="Password" />
-                <button>Sign Up</button>
-            </form>
-        </div>
-        <div class="form-container sign-in-container">
-            <form action="#">
-                <h1>Sign in</h1>
-                <span>or use your account</span>
-                <input type="username" placeholder="Username" />
-                <input type="password" placeholder="Password" />
-                <a href="#">Forgot your password?</a>
-                <button>Sign In</button>
-            </form>
-        </div>
-        <div class="overlay-container">
-            <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <h1>Welcome Back!</h1>
-                    <p>To keep connected with us please login with your personal info</p>
-                    <button class="ghost" id="signIn">Sign In</button>
+<div class="container mt-5">
+    <h1>Welcome to Diplomas Management App</h1>
+    <p>Manage your diplomas easily with our app.</p>
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">Student List</h3>
+                    <p class="card-text"></p>
+                    <a href="#" th:href="@{/student/list-students}" class="btn btn-primary btn-lg">Go to List</a>
                 </div>
-                <div class="overlay-panel overlay-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>Enter your personal details and start journey with us</p>
-                    <button class="ghost" id="signUp">Sign Up</button>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">Professor List</h3>
+                    <p class="card-text"></p>
+                    <a href="#" th:href="@{/professors/list-professors.html}" class="btn btn-primary btn-lg">Go to List</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
+<footer class="bg-light text-center py-3">
+    <p>&copy; 2023 Diplomas Management App</p>
+</footer>
 
-
- 
- <br> <br> <hr> <br> <br>
- 
-  <div sec:authorize="hasRole('ROLE_ANONYMOUS')">
-    <p>
-    	<a th:href="@{/login}" class="btn btn-primary btn-sm mb-3" th:text="Login"></a>
-    	<a th:href="@{/register}" class="btn btn-primary btn-sm mb-3" th:text="Register"></a>
-    </p>
-  </div>
-
-  <div sec:authorize="isAuthenticated()">
-    <h4>Logged as: <span sec:authentication="name"></span></h4>
-    <h4>Has role: <span sec:authentication="authorities"></span></h4>
-    
-    <br> <br> <hr> <br> <br>
-    
-    <p sec:authorize="hasAuthority('Student')">
-    	<a th:href="@{/student/dashboard}" class="btn btn-primary btn-sm mb-3"> Student Dashboard</a>
-    	<a th:href="@{/logout}" class="btn btn-danger"> Logout</a>
-    </p>
-    
-    <p sec:authorize="hasAuthority('Profesor')">
-    	<a th:href="@{/professor/dashboard}" class="btn btn-primary btn-sm mb-3"> Professor Dashboard</a>
-    	<a th:href="@{/logout}" class="btn btn-danger"> Logout</a>
-    </p>
-
-  </div></div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
