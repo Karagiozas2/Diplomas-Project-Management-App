@@ -9,34 +9,60 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-	<title>Register</title>
-</head>
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="/static/css/demo.css">
+
+    <title>Register</title>
+</head>
 
 <body>
 
 <div class="container">
+    <div class="screen">
+        <div class="screen__content">
 
-  <form 
-  action="#" 
-  th:action="@{/save}" th:object="${user}" method="post">
-    <h3>Registration</h3>
-    <input type="text" th:field="*{username}" placeholder="User Name" /> <br/><br/>
-     <input type="password" th:field="*{password}" placeholder="Password" /> <br/><br/>
-    <select th:field="*{role}" required>
-      <option value="">Select</option>
-      <option value="Professor">Professor</option>
-      <option value="Student">Student</option>
-    </select> <br/><br/>
-    
-    <button type="submit" class="btn btn-info col-2">Register</button> 
-    
-    <a th:href="@{/login}" class="btn btn-primary col-2"> Login</a>
+            <!-- Registration form -->
+            <form th:action="@{/save}" th:object="${user}" method="post">
+                <h3>Registration</h3>
+                <div class="login__field">
+                    <i class="login__icon fas fa-user"></i>
+                    <input type="text" class="login__input" th:field="*{username}" placeholder="User Name" />
+                </div>
+                <div class="login__field">
+                    <i class="login__icon fas fa-lock"></i>
+                    <input type="password" class="login__input" th:field="*{password}" placeholder="Password" />
+                </div>
+                <div class="login__field">
+                    <select class="login__input" th:field="*{role}" required>
+                        <option value="">Select</option>
+                        <option value="Professor">Professor</option>
+                        <option value="Student">Student</option>
+                    </select>
+                </div>
+                <button type="submit" class="button login__submit">
+                    <span class="button__text">Register</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+                <button class="button login__submit">
+                    <a th:href="@{/login}" > Login</a>
+                </button>
 
-    <div th:if="${param.error}"><p>Registration Error.</p></div> <br/>
+                <div th:if="${param.error}"><p>Registration Error.</p></div> <br/>
 
-    <span th:utext="${successMessage}"></span>
-  </form>
+                <span th:utext="${successMessage}"></span>
+            </form>
+
+        </div>
+        <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+        </div>
+    </div>
 </div>
+
 </body>
 </html>
