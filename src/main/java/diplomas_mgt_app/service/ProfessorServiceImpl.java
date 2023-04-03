@@ -16,8 +16,8 @@ public class ProfessorServiceImpl implements ProfessorService {
     private ProfessorDAO professorRepository;
 
     @Autowired
-    public ProfessorServiceImpl(ProfessorDAO theEmployeeRepository) {
-        professorRepository = theEmployeeRepository;
+    public ProfessorServiceImpl(ProfessorDAO theProfessorRepository) {
+        professorRepository = theProfessorRepository;
     }
 
     public ProfessorServiceImpl() {
