@@ -29,5 +29,30 @@ public class ProfessorServiceImpl implements ProfessorService {
     public List<Professor> findAll() {
         return professorRepository.findAll();
     }
+    @Override
+    @Transactional
+    public Professor findById(int theId) {
+        Professor result = professorRepository.findById(theId);
+
+        if (result != null ) {
+            return result;
+        }
+        else {
+            // we didn't find the professor
+            throw new RuntimeException("Did not find professor id - " + theId);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void save(Professor theProfessor) {
+        professorRepository.save(theProfessor);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(int theId) {
+        professorRepository.deleteById(theId);
+    }
 }
 

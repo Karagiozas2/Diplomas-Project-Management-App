@@ -25,7 +25,7 @@
   <hr>
 
   <!-- Add a button -->
-  <a th:href="@{/templates/Professors/showFormForAdd(testModelAttr=${test})}"
+  <a th:href="@{/Professors/showFormForAdd(testModelAttr=${test})}"
      class="btn btn-primary btn-sm mb-3">
     Add Professor
   </a>
@@ -48,17 +48,17 @@
       <td th:text="${tempProfessor.firstName}" />
       <td th:text="${tempProfessor.lastName}" />
       <td th:text="${tempProfessor.email}" />
-      <td th:text="${tempProfessor.speciality}" />
+      <td th:text="${tempProfessor.specialty}" />
 
       <td>
         <!-- Add "update" button/link -->
-        <a th:href="@{/templates/Professors/showFormForUpdate(professorId=${tempProfessor.id})}"
+        <a th:href="@{/Professors/showFormForUpdate(professorId=${tempProfessor.id})}"
            class="btn btn-info btn-sm">
           Update
         </a>
 
         <!-- Add "delete" button/link -->
-        <a th:href="@{/professor/delete(professorId=${tempProfessor.id})}"
+        <a th:href="@{/Professors/delete(professorId=${tempProfessor.id})}"
            class="btn btn-danger btn-sm"
            onclick="if (!(confirm('Are you sure you want to delete this professor?'))) return false">
           Delete

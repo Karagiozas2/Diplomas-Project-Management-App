@@ -24,27 +24,27 @@ public class Professor {
     @Column(name="email")
     private String email;
 
-    @Column(name="speciality")
-    private String speciality;
+    @Column(name="specialty")
+    private String specialty;
 
     // define constructors
 
     public Professor() {
 
     }
-    public Professor(int id, String firstName, String lastName, String email, String speciality) {
+    public Professor(int id, String firstName, String lastName, String email, String specialty) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.speciality = speciality;
+        this.specialty = specialty;
     }
 
-    public Professor(String firstName, String lastName, String email, String speciality) {
+    public Professor(String firstName, String lastName, String email, String specialty) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.speciality = speciality;
+        this.specialty = specialty;
     }
 
     public int getId() {
@@ -79,17 +79,17 @@ public class Professor {
         this.email = email;
     }
 
-    public String getSpeciality() {
-        return speciality;
+    public String getSpecialty() {
+        return specialty;
     }
 
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
+    public void setSpeciality(String specialty) {
+        this.specialty = specialty;
     }
 
 
     @Override
     public String toString() {
-        return "Professor{" + "id=" + id + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", email='" + email + '\'' + ", speciality='" + speciality + '\'' + '}';
+        return "Professor{" + "id=" + id + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", email='" + email + '\'' + ", specialty='" + specialty + '\'' + '}';
     }
 }
