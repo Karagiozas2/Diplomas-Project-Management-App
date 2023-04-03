@@ -55,7 +55,8 @@ public class WebSecurityConfig {
                 // URL matching for accessibility
                 .antMatchers("/", "/login", "/register", "/save").permitAll()
                 .antMatchers("/professor/**").hasAnyAuthority("Professor")
-                .antMatchers("/student/**").hasAnyAuthority("Student") // ??? ZAS is this needed ??? - changed from account to user
+                .antMatchers("/student/**").hasAnyAuthority("Student")
+                .antMatchers("/ADMIN/**").hasAnyAuthority("ADMIN")// ??? ZAS is this needed ??? - changed from account to user
                 .anyRequest().authenticated()
                 .and()
                 // form login

@@ -10,7 +10,7 @@ import diplomas_mgt_app.model.Professor;
 import java.util.List;
 
 @Controller
-@RequestMapping("/professors")
+@RequestMapping("/Professors")
 public class ProfessorController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class ProfessorController {
     }
     // add mapping for "/list"
 
-    @RequestMapping("/list")
+    @RequestMapping("/list-professors")
     public String listProfessors(Model theModel) {
 
         // get professor from db
@@ -31,7 +31,7 @@ public class ProfessorController {
         // add to the spring model
         theModel.addAttribute("professors", theProfessors);
 
-        return "professors/list-professors";
+        return "Professors/list-professors";
     }
 
 }

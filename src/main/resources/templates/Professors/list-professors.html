@@ -25,9 +25,9 @@
   <hr>
 
   <!-- Add a button -->
-  <a th:href="@{/professors/showFormForAdd(testModelAttr=${test})}"
+  <a th:href="@{/templates/Professors/showFormForAdd(testModelAttr=${test})}"
      class="btn btn-primary btn-sm mb-3">
-    Add professor
+    Add Professor
   </a>
 
 
@@ -52,7 +52,7 @@
 
       <td>
         <!-- Add "update" button/link -->
-        <a th:href="@{/professors/showFormForUpdate(professorId=${tempProfessor.id})}"
+        <a th:href="@{/templates/Professors/showFormForUpdate(professorId=${tempProfessor.id})}"
            class="btn btn-info btn-sm">
           Update
         </a>
