@@ -83,7 +83,7 @@ public class Professor {
         return specialty;
     }
 
-    public void setSpeciality(String specialty) {
+    public void setSpecialty(String specialty) {
         this.specialty = specialty;
     }
 

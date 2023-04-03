@@ -57,7 +57,7 @@ public class ProfessorController {
         Professor theProfessor = professorService.findById(theId);
 
         // set professor as a model attribute to pre-populate the form
-        theModel.addAttribute("Professor", theProfessor);
+        theModel.addAttribute("professor", theProfessor);
 
 
         // send over to our form
