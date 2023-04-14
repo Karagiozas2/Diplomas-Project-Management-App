@@ -85,4 +85,7 @@ public class Subject {
                 ", theses=" + theses +
                 '}';
     }
+
+    public void save(Professor professor) {
+    }
 }

@@ -42,6 +42,7 @@ public class Thesis {
         this.professor_id = professor_id;
         this.subject = subject;
     }
+
     //getter-setter
 
     public int getId() {

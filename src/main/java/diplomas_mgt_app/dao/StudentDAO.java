@@ -10,4 +10,6 @@ public interface StudentDAO extends JpaRepository<Student, Integer> {
 
     public Student findById(int theId);
 
+    public Student findByEmail(String email);
+
 }
