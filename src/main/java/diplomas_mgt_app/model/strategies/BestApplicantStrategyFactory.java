@@ -1,0 +1,20 @@
+package diplomas_mgt_app.model.strategies;
+
+public class BestApplicantStrategyFactory {
+    public BestApplicantStrategyFactory() {
+    }
+
+    public BestApplicantStrategy createStrategy(String BestApplicantStrategy) {
+        if (BestApplicantStrategy == null) {
+            return null;
+        }
+
+        if (BestApplicantStrategy.equalsIgnoreCase("BestAvgGrade")) {
+            return new BestAvgGradeStrategy();
+        } else if (BestApplicantStrategy.equalsIgnoreCase("FewestCourses")) {
+            return new FewestCoursesStrategy();
+        }
+
+        return null;
+    }
+}

@@ -19,24 +19,28 @@ public class Thesis {
 
     @Column(name = "professor_id")
     private String professor_id;
-
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
     //constructors
     public Thesis() {
 
     }
 
-    public Thesis(int id, String title, String objectives, String professor_id) {
+    public Thesis(int id, String title, String objectives, String professor_id,Subject subject) {
         this.id = id;
         this.title = title;
         this.objectives = objectives;
         this.professor_id = professor_id;
+        this.subject = subject;
     }
 
 
-    public Thesis(String title, String objectives, String professor_id) {
+    public Thesis(String title, String objectives, String professor_id,Subject subject) {
         this.title  = title;
         this.objectives = objectives;
         this.professor_id = professor_id;
+        this.subject = subject;
     }
     //getter-setter
 
@@ -68,12 +72,27 @@ public class Thesis {
         return professor_id;
     }
 
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
     public void setProfessor_id(String professor_id) {
         this.professor_id = professor_id;
     }
     // tostring
+
     @Override
     public String toString() {
-        return "Thesis{" + "id=" + id + ", title='" + title + '\'' + ", objectives='" + objectives + '\'' + ", professor_id='" + professor_id + '\'' + '}';
+        return "Thesis{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", objectives='" + objectives + '\'' +
+                ", professor_id='" + professor_id + '\'' +
+                ", subject=" + subject +
+                '}';
     }
 }

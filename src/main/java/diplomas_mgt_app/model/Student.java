@@ -1,6 +1,7 @@
 package diplomas_mgt_app.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="student")
@@ -31,11 +32,13 @@ public class Student {
     @Column(name="number_of_remaining_courses_for_graduation")
     private int numberofremainingcoursesforgraduation;
 
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private List<Application> applications;
+
     public Student() {
 
     }
-
-    public Student(int id, String firstName, String lastName, String email, int yearofstudies, int currentaveragegrade, int numberofremainingcoursesforgraduation) {
+    public Student(int id, String firstName, String lastName, String email, int yearofstudies, int currentaveragegrade, int numberofremainingcoursesforgraduation, List<Application> applications) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -43,15 +46,17 @@ public class Student {
         this.yearofstudies = yearofstudies;
         this.currentaveragegrade = currentaveragegrade;
         this.numberofremainingcoursesforgraduation = numberofremainingcoursesforgraduation;
+        this.applications = applications;
     }
 
-    public Student(String firstName, String lastName, String email, int yearofstudies, int currentaveragegrade, int numberofremainingcoursesforgraduation) {
+    public Student(String firstName, String lastName, String email, int yearofstudies, int currentaveragegrade, int numberofremainingcoursesforgraduation, List<Application> applications) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.yearofstudies = yearofstudies;
         this.currentaveragegrade = currentaveragegrade;
         this.numberofremainingcoursesforgraduation = numberofremainingcoursesforgraduation;
+        this.applications = applications;
     }
 
     public int getId() {
@@ -108,6 +113,14 @@ public class Student {
 
     public void setNumberofremainingcoursesforgraduation(int numberofremainingcoursesforgraduation) {
         this.numberofremainingcoursesforgraduation = numberofremainingcoursesforgraduation;
+    }
+
+    public List<Application> getApplications() {
+        return applications;
+    }
+
+    public void setApplications(List<Application> applications) {
+        this.applications = applications;
     }
 
     @Override
