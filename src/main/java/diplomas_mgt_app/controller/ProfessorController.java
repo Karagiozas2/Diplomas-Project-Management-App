@@ -83,7 +83,7 @@ public class ProfessorController {
         professorService.save(theProfessor);
 
         // redirect to /professors/list ACTION
-        return "redirect:/Professors/list-professors";
+        return "redirect:Professors/professor-form";
     }
 
 
@@ -102,10 +102,10 @@ public class ProfessorController {
     public String getProfessorMainMenu(Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentProfessorEmail = authentication.getName();
+        String currentProfessorUsername = authentication.getName();
 
         // Fetch the professor using the email
-        Professor currentProfessor = professorService.retrieveProfile(currentProfessorEmail);
+        Professor currentProfessor = professorService.findByUsername(currentProfessorUsername);
 
         // Add the professor to the model
         model.addAttribute("professor", currentProfessor);
@@ -124,7 +124,7 @@ public class ProfessorController {
 
         // Add the professor to the model
         model.addAttribute("professor", currentProfessor);
-        return "";
+        return "Professors/main-menu";
     }
 
     @RequestMapping(value = "/saveProfile", method = RequestMethod.POST)
@@ -138,20 +138,38 @@ public class ProfessorController {
 
     @RequestMapping("/listSubjects")
     public String listProfessorSubject(Model model) {
-        // Implement logic here
-        return "";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentProfessorUsername = authentication.getName();
+
+
+        List<Subject> subjects = professorService.listProfessorSubjects(currentProfessorUsername);
+        model.addAttribute("subjects", subjects);
+
+        return "Professors/list-subjects";
     }
 
     @RequestMapping("/showSubjectForm")
     public String showSubjectForm(Model model) {
-        // Implement logic here
-        return "";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentProfessorUsername = authentication.getName();
+        Professor currentProfessor = professorService.findByUsername(currentProfessorUsername);
+
+        Subject subject = new Subject();
+        subject.setProfessor(currentProfessor);
+
+        model.addAttribute("subject", subject);
+
+        return "Professors/subject-form";
     }
 
     @RequestMapping(value = "/addSubject", method = RequestMethod.POST)
     public String addSubject(@ModelAttribute("subject") Subject subject, Model model) {
-        // Implement logic here
-        return "";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentProfessorUsername = authentication.getName();
+
+        professorService.addSubject(currentProfessorUsername, subject);
+
+        return "redirect:/Professors/listSubjects";
     }
 
     @RequestMapping("/listApplications")

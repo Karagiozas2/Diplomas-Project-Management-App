@@ -20,24 +20,29 @@
 <h1>Professor Main Menu</h1>
 
 <p>First Name: <span th:text="${professor.firstName}"></span></p>
+
 <p>Last Name: <span th:text="${professor.lastName}"></span></p>
+
 <p>Email: <span th:text="${professor.email}"></span></p>
+
 <p>Specialty: <span th:text="${professor.specialty}"></span></p>
+
+<p>username: <span th:text="${professor.username}"></span></p>
+
 
 <a th:href="@{/Professors/showFormForUpdate(professorId=${professor.id})}"
    class="btn btn-info btn-sm">
     Update
 </a>
 
-<!-- Navigation buttons -->
-<a href="#" th:href="@{/Professors/listSubjects}"
-   class="btn btn-info btn-sm">
-    Subjects List</a>
+<a href="#" th:href="@{/Professors/listSubjects}" class="btn btn-info btn-sm">Subjects List</a>
+
 <a href="#" th:href="@{/Professors/listApplications}"
    class="btn btn-info btn-sm">
     Current Applications</a>
 <a href="#" th:href="@{/Professors/listTheses}"
    class="btn btn-info btn-sm">
     Theses List</a>
+
 </body>
 </html>

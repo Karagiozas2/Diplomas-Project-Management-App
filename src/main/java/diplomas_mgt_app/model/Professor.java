@@ -27,17 +27,20 @@ public class Professor {
     @Column(name="specialty")
     private String specialty;
 
+    @Column(name="username")
+    private String username;
     // define constructors
 
     public Professor() {
 
     }
-    public Professor(int id, String firstName, String lastName, String email, String specialty) {
+    public Professor(int id, String firstName, String lastName, String email, String specialty,String username) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.specialty = specialty;
+        this.username =username;
     }
 
     public Professor(String firstName, String lastName, String email, String specialty) {
@@ -87,6 +90,13 @@ public class Professor {
         this.specialty = specialty;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     @Override
     public String toString() {

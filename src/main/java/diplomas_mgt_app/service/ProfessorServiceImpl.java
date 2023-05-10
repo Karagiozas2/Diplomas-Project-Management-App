@@ -73,6 +73,11 @@ public class ProfessorServiceImpl implements ProfessorService {
     public Professor retrieveProfile(String email) {
         return professorRepository.findByEmail(email);
     }
+    @Override
+    @Transactional
+    public Professor findByUsername(String username) {
+        return professorRepository.findByUsername(username);
+    }
 
     @Override
     @Transactional
@@ -82,8 +87,8 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     @Transactional
-    public List<Subject> listProfessorSubjects(String email) {
-        Professor professor = professorRepository.findByEmail(email);
+    public List<Subject> listProfessorSubjects(String username) {
+        Professor professor = professorRepository.findByUsername(username);
         return subjectDAO.findByProfessor(professor);
     }
 

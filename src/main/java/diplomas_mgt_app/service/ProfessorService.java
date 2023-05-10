@@ -2,6 +2,7 @@ package diplomas_mgt_app.service;
 
 import java.util.List;
 import diplomas_mgt_app.model.*;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface ProfessorService {
 
@@ -14,6 +15,10 @@ public interface ProfessorService {
     public void deleteById(int theId);
 
     public Professor retrieveProfile(String email);
+
+
+    Professor findByUsername(String username);
+
     public void saveProfile(Professor theProfessor);
     public List<Subject> listProfessorSubjects(String email);
     public void addSubject(String email, Subject subject);

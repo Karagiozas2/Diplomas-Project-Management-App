@@ -11,5 +11,6 @@ public interface ProfessorDAO extends JpaRepository<Professor, Integer> {
     public Professor findById(int theId);
 
     public Professor findByEmail(String email);
+    public Professor findByUsername(String username);
 
 }
