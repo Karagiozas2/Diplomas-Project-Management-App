@@ -1,12 +1,16 @@
 package diplomas_mgt_app.controller;
 
+import diplomas_mgt_app.model.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import diplomas_mgt_app.service.ProfessorService;
 import diplomas_mgt_app.model.Professor;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -92,6 +96,73 @@ public class ProfessorController {
         // redirect to /professors/list ACTION
         return "redirect:/Professors/list-professors";
 
+    }
+
+    @RequestMapping("/mainMenu")
+    public String getProfessorMainMenu(Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentProfessorEmail = authentication.getName();
+
+        // Fetch the professor using the email
+        Professor currentProfessor = professorService.retrieveProfile(currentProfessorEmail);
+
+        // Add the professor to the model
+        model.addAttribute("professor", currentProfessor);
+
+        // Redirect to the main menu view
+        return "Professors/main-menu";
+    }
+
+    @RequestMapping("/retrieveProfile")
+    public String retrieveProfile(Model model) {
+        // Implement logic here
+        return "";
+    }
+
+    @RequestMapping(value = "/saveProfile", method = RequestMethod.POST)
+    public String saveProfile(@ModelAttribute("professor") Professor professor, Model model) {
+        // Implement logic here
+        professorService.save(professor);
+
+        // Redirect to the main menu
+        return "redirect:/Professors/mainMenu";
+    }
+
+    @RequestMapping("/listSubjects")
+    public String listProfessorSubject(Model model) {
+        // Implement logic here
+        return "";
+    }
+
+    @RequestMapping("/showSubjectForm")
+    public String showSubjectForm(Model model) {
+        // Implement logic here
+        return "";
+    }
+
+    @RequestMapping(value = "/addSubject", method = RequestMethod.POST)
+    public String addSubject(@ModelAttribute("subject") Subject subject, Model model) {
+        // Implement logic here
+        return "";
+    }
+
+    @RequestMapping("/listApplications")
+    public String listApplications(@RequestParam("subjectId") Integer subjectId, Model model) {
+        // Implement logic here
+        return "";
+    }
+
+    @RequestMapping("/assignSubject")
+    public String assignSubject(@RequestParam("applicationId") Integer applicationId, Model model) {
+        // Implement logic here
+        return "";
+    }
+
+    @RequestMapping("/listTheses")
+    public String listProfessorTheses(Model model) {
+        // Implement logic here
+        return "";
     }
 
 }

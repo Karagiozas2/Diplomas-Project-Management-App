@@ -24,6 +24,9 @@ public class Subject {
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     private List<Application> applications;
 
+    @ManyToOne
+    @JoinColumn(name = "professor_id")
+    private Professor professor;
     public Subject() {
 
     }

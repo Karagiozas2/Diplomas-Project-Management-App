@@ -10,7 +10,6 @@ import java.util.List;
 public interface SubjectDAO extends JpaRepository<Subject, Integer> {
 
     public Subject findById(int theId);
-    List<Subject> findByProfessorEmail(String email);
     public List<Subject> findByProfessor(Professor professor);
 
     public Subject findByIdAndProfessor(int id, Professor professor);
