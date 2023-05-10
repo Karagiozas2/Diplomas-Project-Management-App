@@ -12,6 +12,8 @@ import java.util.List;
 public interface ThesisDAO extends JpaRepository<Thesis, Integer> {
 
     public Thesis findById(int theId);
-    List<Thesis> findByProfessorEmail(String email);
+
+    List<Thesis> findByProfessorId(int professor_id);
+
     public List<Thesis> findByProfessor(Professor professor);
 }

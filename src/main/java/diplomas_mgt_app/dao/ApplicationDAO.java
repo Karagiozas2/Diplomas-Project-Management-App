@@ -10,6 +10,7 @@ import java.util.List;
 public interface ApplicationDAO extends JpaRepository<Application, Integer> {
 
     public Application findById(int theId);
-    List<Application> findBySubjectIdAndProfessorEmail(Integer subjectId, String email);
+
+    List<Application> findBySubjectId(Integer subjectId);
     public List<Application> findBySubject(Subject subject);
 }

@@ -1,4 +1,3 @@
-
 create table thesis_directory.thesis
 (
     id           int auto_increment

@@ -116,7 +116,14 @@ public class ProfessorController {
 
     @RequestMapping("/retrieveProfile")
     public String retrieveProfile(Model model) {
-        // Implement logic here
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentProfessorEmail = authentication.getName();
+
+        // Fetch the professor using the email
+        Professor currentProfessor = professorService.retrieveProfile(currentProfessorEmail);
+
+        // Add the professor to the model
+        model.addAttribute("professor", currentProfessor);
         return "";
     }
 

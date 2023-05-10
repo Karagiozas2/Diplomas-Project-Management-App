@@ -17,29 +17,32 @@ public class Thesis {
     @Column(name="objectives")
     private String objectives;
 
-    @Column(name = "professor_id")
-    private String professor_id;
     @ManyToOne
     @JoinColumn(name = "subject_id")
     private Subject subject;
+
+    @ManyToOne
+    @JoinColumn(name = "professor_id")
+    private Professor professor;
+
     //constructors
     public Thesis() {
 
     }
 
-    public Thesis(int id, String title, String objectives, String professor_id,Subject subject) {
+    public Thesis(int id, String title, String objectives, Professor professor,Subject subject) {
         this.id = id;
         this.title = title;
         this.objectives = objectives;
-        this.professor_id = professor_id;
+        this.professor = professor;
         this.subject = subject;
     }
 
 
-    public Thesis(String title, String objectives, String professor_id,Subject subject) {
+    public Thesis(String title, String objectives, Professor professor,Subject subject) {
         this.title  = title;
         this.objectives = objectives;
-        this.professor_id = professor_id;
+        this.professor = professor;
         this.subject = subject;
     }
 
@@ -69,21 +72,22 @@ public class Thesis {
         this.objectives = objectives;
     }
 
-    public String getProfessor_id() {
-        return professor_id;
-    }
-
     public Subject getSubject() {
         return subject;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
     public void setSubject(Subject subject) {
         this.subject = subject;
     }
 
-    public void setProfessor_id(String professor_id) {
-        this.professor_id = professor_id;
-    }
     // tostring
 
     @Override
@@ -92,7 +96,7 @@ public class Thesis {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", objectives='" + objectives + '\'' +
-                ", professor_id='" + professor_id + '\'' +
+                ", professor='" + professor + '\'' +
                 ", subject=" + subject +
                 '}';
     }

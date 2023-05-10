@@ -18,6 +18,6 @@ public interface ProfessorService {
     public List<Subject> listProfessorSubjects(String email);
     public void addSubject(String email, Subject subject);
     public List<Application> listApplications(String email, Integer subjectId);
-    public List<Thesis> listProfessorTheses(String email);
+    public List<Thesis> listProfessorTheses(int professor_id);
     public void assignSubject(String email, Integer applicationId);
 }

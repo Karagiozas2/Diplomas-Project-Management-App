@@ -38,11 +38,11 @@ public class CustomSecuritySuccessHandler extends SimpleUrlAuthenticationSuccess
 	        }
 	        
 	        if(roles.contains("Professor")){
-	            url = "/Professors/main-menu";
+	            url = "/Professors/mainMenu";
 	        }else if(roles.contains("Student")) {
 	            url = "/Students/list-student"; // ZAS added /user/ here
 	        }else if(roles.contains("ADMIN")) {
-				url = "/Professors/main-menu";
+				url = "/Professors/mainMenu";
 			}
 	        
 	        return url;
