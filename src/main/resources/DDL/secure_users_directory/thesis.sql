@@ -1,4 +1,4 @@
-create table thesis_directory.thesis
+create table thesis
 (
     id           int auto_increment
         primary key,

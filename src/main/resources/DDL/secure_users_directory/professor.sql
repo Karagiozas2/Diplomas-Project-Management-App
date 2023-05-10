@@ -1,4 +1,4 @@
-create table secure_users_directory.professor
+create table professor
 (
     id         int auto_increment
         primary key,
