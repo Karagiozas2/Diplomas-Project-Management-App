@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+
+    <!-- Set the Character set for the page -->
+    <meta charset="utf-8">
+
+    <!-- Let the page adapt to client device -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Link to external resource (css, search, etc.) -->
+    <!-- Link to Bootstrap CSS in this case -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Student Directory</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Student Directory</h3>
+    <hr>
+
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Year Of Studies</th>
+            <th>Current Avg Grade</th>
+            <th>Number of remaining courses</th>
+            <th>Username</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempStudent : ${students}">
+
+            <td th:text="${tempStudent.firstName}" />
+            <td th:text="${tempStudent.lastName}" />
+            <td th:text="${tempStudent.email}" />
+            <td th:text="${tempStudent.yearofstudies}" />
+            <td th:text="${tempStudent.currentaveragegrade}" />
+            <td th:text="${tempStudent.numberofremainingcoursesforgraduation}" />
+            <td th:text="${tempStudent.username}" />
+
+            <td>
+
+            </td>
+
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
+

@@ -10,7 +10,7 @@ public class BestAvgGradeStrategy implements BestApplicantStrategy{
     }
 
     public int compareApplications(Application app1, Application app2) {
-        return Integer.compare(app2.getStudent().getCurrentaveragegrade(), app1.getStudent().getCurrentaveragegrade());
+        return Double.compare(app2.getStudent().getCurrentaveragegrade(), app1.getStudent().getCurrentaveragegrade());
     }
 
     @Override

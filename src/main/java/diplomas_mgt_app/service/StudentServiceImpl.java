@@ -2,6 +2,8 @@ package diplomas_mgt_app.service;
 
 import java.util.List;
 
+import diplomas_mgt_app.dao.ProfessorDAO;
+import diplomas_mgt_app.model.Professor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,9 @@ import diplomas_mgt_app.model.Subject;
 
 @Service
 public class StudentServiceImpl implements StudentService {
+
+    @Autowired
+    private StudentDAO studentRepository;
 
     @Autowired
     private StudentDAO studentDAO;
@@ -41,6 +46,19 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public List<Subject> listStudentSubjects() {
         return subjectDAO.findAll();
+    }
+
+
+    @Override
+    @Transactional
+    public List<Student> findAll() {
+        return studentRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public Student findByUsername(String username) {
+        return studentRepository.findByUsername(username);
     }
 
     @Override

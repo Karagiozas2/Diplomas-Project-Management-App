@@ -83,7 +83,7 @@ public class ProfessorController {
         professorService.save(theProfessor);
 
         // redirect to /professors/list ACTION
-        return "redirect:Professors/professor-form";
+        return "auth/signin";
     }
 
 
@@ -104,7 +104,7 @@ public class ProfessorController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentProfessorUsername = authentication.getName();
 
-        // Fetch the professor using the email
+        // Fetch the professor using the username
         Professor currentProfessor = professorService.findByUsername(currentProfessorUsername);
 
         // Add the professor to the model

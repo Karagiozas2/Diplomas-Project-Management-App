@@ -27,10 +27,13 @@ public class Student {
     private int yearofstudies;
 
     @Column(name="current_average_grade")
-    private int currentaveragegrade;
+    private double currentaveragegrade;
 
     @Column(name="number_of_remaining_courses_for_graduation")
     private int numberofremainingcoursesforgraduation;
+
+    @Column(name="username")
+    private String username;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<Application> applications;
@@ -38,7 +41,7 @@ public class Student {
     public Student() {
 
     }
-    public Student(int id, String firstName, String lastName, String email, int yearofstudies, int currentaveragegrade, int numberofremainingcoursesforgraduation, List<Application> applications) {
+    public Student(int id, String firstName, String lastName, String email, int yearofstudies, double currentaveragegrade, int numberofremainingcoursesforgraduation, List<Application> applications,String username) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -47,9 +50,10 @@ public class Student {
         this.currentaveragegrade = currentaveragegrade;
         this.numberofremainingcoursesforgraduation = numberofremainingcoursesforgraduation;
         this.applications = applications;
+        this.username = username;
     }
 
-    public Student(String firstName, String lastName, String email, int yearofstudies, int currentaveragegrade, int numberofremainingcoursesforgraduation, List<Application> applications) {
+    public Student(String firstName, String lastName, String email, int yearofstudies, double currentaveragegrade, int numberofremainingcoursesforgraduation, List<Application> applications) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -57,6 +61,14 @@ public class Student {
         this.currentaveragegrade = currentaveragegrade;
         this.numberofremainingcoursesforgraduation = numberofremainingcoursesforgraduation;
         this.applications = applications;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getId() {
@@ -99,11 +111,11 @@ public class Student {
         this.yearofstudies = yearofstudies;
     }
 
-    public int getCurrentaveragegrade() {
+    public double getCurrentaveragegrade() {
         return currentaveragegrade;
     }
 
-    public void setCurrentaveragegrade(int currentaveragegrade) {
+    public void setCurrentaveragegrade(double currentaveragegrade) {
         this.currentaveragegrade = currentaveragegrade;
     }
 
