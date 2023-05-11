@@ -7,7 +7,7 @@ public interface SubjectService {
 
     void save(Subject subject);
 
-    List<Subject> findAll();
+    public List<Subject> findAll();
 
     Subject findById(Integer id);
 }

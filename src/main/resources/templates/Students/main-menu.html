@@ -37,13 +37,9 @@
 
 <a href="#" th:href="@{/Students/listSubjects}" class="btn btn-info btn-sm">Subjects List</a>
 
-<a href="#" th:href="@{/Students/listApplications}"
+<a href="#" th:href="@{'/Students/listApplications/' + ${student.id}}"
    class="btn btn-info btn-sm">
     Current Applications</a>
-
-<a href="#" th:href="@{/Students/listTheses}"
-   class="btn btn-info btn-sm">
-    Theses List</a>
 
 </body>
 </html>

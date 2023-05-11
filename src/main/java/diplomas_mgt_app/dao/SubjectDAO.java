@@ -14,4 +14,6 @@ public interface SubjectDAO extends JpaRepository<Subject, Integer> {
 
     public Subject findByIdAndProfessor(int id, Professor professor);
     void save(Professor theProfessor);
+
+    public List<Subject> findAll();
 }

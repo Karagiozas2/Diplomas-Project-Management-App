@@ -1,5 +1,6 @@
 package diplomas_mgt_app.model;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "application")
@@ -15,18 +16,20 @@ public class Application {
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "subject_id")
-    private Subject subject;
+    @JoinColumn(name = "thesis_id")
+    private Thesis thesis;
 
     @Column(name = "status")
     private String status;
 
+    @OneToMany(mappedBy = "thesis", cascade = CascadeType.ALL)
+    private List<Application> applications;
     public Application() {
     }
 
-    public Application(Student student, Subject subject, String status) {
+    public Application(Student student, Thesis thesis, String status) {
         this.student = student;
-        this.subject = subject;
+        this.thesis = thesis;
         this.status = status;
     }
 
@@ -46,14 +49,6 @@ public class Application {
         this.student = student;
     }
 
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -62,12 +57,20 @@ public class Application {
         this.status = status;
     }
 
+    public Thesis getThesis() {
+        return thesis;
+    }
+
+    public void setThesis(Thesis thesis) {
+        this.thesis = thesis;
+    }
+
     @Override
     public String toString() {
         return "Application{" +
                 "id=" + id +
                 ", student=" + student +
-                ", subject=" + subject +
+                ", thesis=" + thesis +
                 ", status='" + status + '\'' +
                 '}';
     }

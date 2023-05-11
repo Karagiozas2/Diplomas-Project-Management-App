@@ -1,19 +1,18 @@
 package diplomas_mgt_app.controller;
 
-import diplomas_mgt_app.model.Student;
+import diplomas_mgt_app.model.*;
+import diplomas_mgt_app.service.ApplicationService;
 import diplomas_mgt_app.service.StudentService;
+import diplomas_mgt_app.service.SubjectService;
+import diplomas_mgt_app.service.ThesisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import diplomas_mgt_app.service.ProfessorService;
-import diplomas_mgt_app.model.Professor;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -23,12 +22,23 @@ import java.util.List;
 
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private ApplicationService applicationService;
 
     @Autowired
-    public StudentController(StudentService theStudentService) {
+    private SubjectService subjectService;
+
+    @Autowired
+    private ThesisService thesisService;
+
+    @Autowired
+    public StudentController(StudentService theStudentService, SubjectService theSubjectService,ApplicationService theApplicationService,ThesisService theThesisService) {
         studentService = theStudentService;
+        subjectService = theSubjectService;
+        applicationService = theApplicationService;
+        thesisService = theThesisService;
     }
-    // add mapping for "/list"
+
 
     @RequestMapping("/list-students")
     public String listStudents(Model theModel) {
@@ -73,6 +83,49 @@ import java.util.List;
         return "Students/main-menu";
     }
 
+    @RequestMapping("/listSubjects")
+    public String listSubject(Model model) {
 
+        List<Subject> subjects = subjectService.findAll();
+
+        model.addAttribute("subjects", subjects);
+
+        return "Students/list-subjects";
+    }
+
+    @RequestMapping("/listThesis/{subjectId}")
+    public String listThesis(@PathVariable("subjectId") Integer thesisId, Model model) {
+
+        List<Thesis> theses = thesisService.findBySubjectId(thesisId);
+
+        model.addAttribute("theses", theses);
+
+        return "Students/list-theses";
+    }
+
+    @RequestMapping("/apply/Thesis/{thesisId}")
+    public String applyForThesis(@PathVariable("thesisId") Integer thesisId, Model model, Principal principal) {
+
+        Thesis thesis = thesisService.findById(thesisId);
+
+        Student student = studentService.findByUsername(principal.getName());
+
+
+        Application application = new Application();
+        application.setStudent(student);
+        application.setThesis(thesis);
+        application.setStatus("pending");
+
+        applicationService.save(application);
+
+        return "redirect:/Students/mainMenu";
+    }
+    @RequestMapping("/listApplications/{studentId}")
+    public String listStudentApplications(@PathVariable int studentId, Model model) {
+        List<Application> applications = studentService.listStudentApplications(studentId);
+        model.addAttribute("applications", applications);
+
+        return "Students/list-applications";
+    }
 
 }

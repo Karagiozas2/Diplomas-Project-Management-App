@@ -1,9 +1,10 @@
 package diplomas_mgt_app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import diplomas_mgt_app.dao.ProfessorDAO;
-import diplomas_mgt_app.model.Professor;
+import diplomas_mgt_app.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,9 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import diplomas_mgt_app.dao.ApplicationDAO;
 import diplomas_mgt_app.dao.StudentDAO;
 import diplomas_mgt_app.dao.SubjectDAO;
-import diplomas_mgt_app.model.Application;
-import diplomas_mgt_app.model.Student;
-import diplomas_mgt_app.model.Subject;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -62,17 +60,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    @Transactional
-    public void applyToSubject(String email, Integer subjectId) {
-        Student student = studentDAO.findByEmail(email);
-        Subject subject = subjectDAO.getOne(subjectId);
-
-        if (student != null && subject != null) {
-            // Create a new Application and save it
-            Application application = new Application(student, subject, "pending");
-            applicationDAO.save(application);
-        } else {
-            // Handle errors (e.g., student or subject not found)
+    public List<Application> listStudentApplications(int studentId) {
+        Student student = studentDAO.findById(studentId);
+        if (student != null) {
+            return applicationDAO.findByStudent(student);
         }
+        return new ArrayList<>();
     }
 }

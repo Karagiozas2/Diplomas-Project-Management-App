@@ -102,14 +102,6 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     @Transactional
-    public List<Application> listApplications(String email, Integer subjectId) {
-        Professor professor = professorRepository.findByEmail(email);
-        Subject subject = subjectDAO.findByIdAndProfessor(subjectId, professor);
-        return applicationDAO.findBySubject(subject);
-    }
-
-    @Override
-    @Transactional
     public List<Thesis> listProfessorTheses(int professor_id) {
         Professor professor = professorRepository.findById(professor_id);
         return thesisDAO.findByProfessorId(professor_id);

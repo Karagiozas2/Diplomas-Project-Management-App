@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+
+    <!-- Set the Character set for the page -->
+    <meta charset="utf-8">
+
+    <!-- Let the page adapt to client device -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Link to external resource (css, search, etc.) -->
+    <!-- Link to Bootstrap CSS in this case -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Applications List</title>
+</head>
+<body>
+<h1>Applications List</h1>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th>Application ID</th>
+        <th>Title</th>
+        <th>Subject</th>
+        <th>Description</th>
+        <th>Status</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="applications : ${applications}">
+        <td th:text="${applications.id}"></td>
+        <td th:text="${applications.thesis.title}"></td>
+        <td th:text="${applications.thesis.subject.name}"></td>
+        <td th:text="${applications.thesis.subject.description}"></td>
+        <td th:text="${applications.status}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="#" th:href="@{/Students/mainMenu}" class="btn btn-info btn-sm">Back to Main Menu</a>
+</body>
+</html>

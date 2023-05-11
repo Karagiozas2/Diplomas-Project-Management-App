@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+
+    <!-- Set the Character set for the page -->
+    <meta charset="utf-8">
+
+    <!-- Let the page adapt to client device -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Link to external resource (css, search, etc.) -->
+    <!-- Link to Bootstrap CSS in this case -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Thesis List</title>
+</head>
+<body>
+<h1>Thesis List</h1>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th>Thesis ID</th>
+        <th>Thesis Title</th>
+        <th>Thesis Objectives</th>
+        <th>Thesis Professor</th>
+        <th>Thesis Subject</th>
+        <th>Actions</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="thesis : ${theses}">
+        <td th:text="${thesis.id}"></td>
+        <td th:text="${thesis.title}"></td>
+        <td th:text="${thesis.objectives}"></td>
+        <td th:text="${thesis.professor.firstName+thesis.professor.lastName}"></td>
+        <td th:text="${thesis.subject.name}"></td>
+        <td>
+            <a th:href="@{'/Students/apply/Thesis/' + ${thesis.id}}" class="btn btn-primary">Apply</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="#" th:href="@{/Students/mainMenu}" class="btn btn-info btn-sm">Back to Main Menu</a>
+</body>
+</html>

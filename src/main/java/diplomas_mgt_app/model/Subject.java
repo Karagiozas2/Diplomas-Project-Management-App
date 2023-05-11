@@ -21,8 +21,6 @@ public class Subject {
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     private List<Thesis> theses;
 
-    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
-    private List<Application> applications;
 
     @ManyToOne
     @JoinColumn(name = "professor_id")
@@ -31,12 +29,11 @@ public class Subject {
 
     }
 
-    public Subject(int id, String name, String description, List<Thesis> theses, List<Application> applications) {
+    public Subject(int id, String name, String description, List<Thesis> theses) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.theses = theses;
-        this.applications = applications;
     }
 
     public int getId() {
@@ -69,14 +66,6 @@ public class Subject {
 
     public void setTheses(List<Thesis> theses) {
         this.theses = theses;
-    }
-
-    public List<Application> getApplications() {
-        return applications;
-    }
-
-    public void setApplications(List<Application> applications) {
-        this.applications = applications;
     }
 
     public Professor getProfessor() {
