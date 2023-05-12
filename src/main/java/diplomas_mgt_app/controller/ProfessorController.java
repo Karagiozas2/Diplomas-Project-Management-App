@@ -1,8 +1,8 @@
 package diplomas_mgt_app.controller;
 
-import diplomas_mgt_app.model.Application;
-import diplomas_mgt_app.model.Subject;
-import diplomas_mgt_app.model.Thesis;
+import diplomas_mgt_app.model.*;
+import diplomas_mgt_app.model.strategies.BestApplicantStrategy;
+import diplomas_mgt_app.model.strategies.BestApplicantStrategyFactory;
 import diplomas_mgt_app.service.ApplicationService;
 import diplomas_mgt_app.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import diplomas_mgt_app.service.ProfessorService;
-import diplomas_mgt_app.model.Professor;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -230,6 +226,7 @@ public class ProfessorController {
     public String listApplications(@RequestParam("thesisId") Integer thesisId, Model model) {
         List<Application> applications = applicationService.findAllByThesisId(thesisId);
         model.addAttribute("applications", applications);
+        model.addAttribute("thesisId", thesisId);
         return "Professors/list-applications";
     }
 
@@ -251,6 +248,20 @@ public class ProfessorController {
             applicationService.save(application);
         }
         return "redirect:/Professors/mainMenu";
+    }
+
+
+    @PostMapping("/selectStrategy")
+    public String selectStrategy(@RequestParam("strategy") String strategy, @RequestParam("thesisId") Integer thesisId, Model model) {
+        BestApplicantStrategyFactory factory = new BestApplicantStrategyFactory();
+        BestApplicantStrategy bestApplicantStrategy = factory.createStrategy(strategy);
+
+        List<Application> applications = applicationService.findAllByThesisId(thesisId);
+        Student bestStudent = bestApplicantStrategy.findBestApplicant(applications);
+
+        model.addAttribute("bestStudent", bestStudent);
+
+        return "redirect:/Professors/listApplications?thesisId=" + thesisId;
     }
 
 }

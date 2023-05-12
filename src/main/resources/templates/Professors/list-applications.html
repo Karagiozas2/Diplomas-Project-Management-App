@@ -42,6 +42,21 @@
 </tbody>
 </table>
 
+<table>
+<form action="#" th:action="@{/Professors/selectStrategy}" method="post">
+    <select name="strategy">
+        <option value="BestAvgGrade">Best Average Grade</option>
+        <option value="FewestCourses">Fewest Courses</option>
+    </select>
+    <input type="hidden" name="thesisId" th:value="${thesisId}" />
+    <button type="submit">Select Strategy</button>
+</form>
+</table>
+
+<div th:if="${bestStudent != null}">
+    <h2>Best Student: <span th:text="${bestStudent.firstName + ' ' + bestStudent.lastName}"></span></h2>
+</div>
+
 <a href="#" th:href="@{/Professors/mainMenu}" class="btn btn-info btn-sm">Back to Main Menu</a>
 </body>
 </html>

@@ -1,6 +1,5 @@
 package diplomas_mgt_app.model;
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "application")
@@ -22,15 +21,26 @@ public class Application {
     @Column(name = "status")
     private String status;
 
-    @OneToMany(mappedBy = "thesis", cascade = CascadeType.ALL)
-    private List<Application> applications;
-    public Application() {
-    }
-
     public Application(Student student, Thesis thesis, String status) {
         this.student = student;
         this.thesis = thesis;
         this.status = status;
+    }
+
+    public Application(int id, Student student1, Thesis thesis) {
+        this.id = id;
+        this.student = student1;
+        this.thesis = thesis;
+    }
+
+
+    public Application(Student student1, Thesis thesis) {
+        this.student = student1;
+        this.thesis = thesis;
+    }
+
+    public Application() {
+
     }
 
     public int getId() {

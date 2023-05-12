@@ -43,6 +43,10 @@ public class Professor {
         this.username =username;
     }
 
+    public Professor(int id) {
+        this.id = id;
+    }
+
     public Professor(String firstName, String lastName, String email, String specialty) {
         this.firstName = firstName;
         this.lastName = lastName;

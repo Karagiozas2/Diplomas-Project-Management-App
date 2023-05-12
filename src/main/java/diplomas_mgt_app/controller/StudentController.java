@@ -111,7 +111,7 @@ import java.util.List;
         Student student = studentService.findByUsername(principal.getName());
 
 
-        Application application = new Application();
+        Application application = new Application(student, thesis);
         application.setStudent(student);
         application.setThesis(thesis);
         application.setStatus("pending");

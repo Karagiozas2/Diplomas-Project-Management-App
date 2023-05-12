@@ -38,6 +38,12 @@ public class Thesis {
         this.subject = subject;
     }
 
+    public Thesis(int id,Professor professor,Subject subject) {
+        this.id = id;
+        this.professor = professor;
+        this.subject = subject;
+    }
+
 
     public Thesis(String title, String objectives, Professor professor,Subject subject) {
         this.title  = title;

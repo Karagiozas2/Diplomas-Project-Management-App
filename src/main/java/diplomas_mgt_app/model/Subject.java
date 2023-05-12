@@ -35,6 +35,9 @@ public class Subject {
         this.description = description;
         this.theses = theses;
     }
+    public Subject(int id) {
+        this.id = id;
+    }
 
     public int getId() {
         return id;

@@ -53,6 +53,13 @@ public class Student {
         this.username = username;
     }
 
+
+    public Student(int id, double currentaveragegrade, int numberofremainingcoursesforgraduation) {
+        this.id = id;
+        this.currentaveragegrade = currentaveragegrade;
+        this.numberofremainingcoursesforgraduation = numberofremainingcoursesforgraduation;
+    }
+
     public Student(String firstName, String lastName, String email, int yearofstudies, double currentaveragegrade, int numberofremainingcoursesforgraduation, List<Application> applications) {
         this.firstName = firstName;
         this.lastName = lastName;
