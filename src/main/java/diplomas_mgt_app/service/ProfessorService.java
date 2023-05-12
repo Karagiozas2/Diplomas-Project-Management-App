@@ -22,6 +22,9 @@ public interface ProfessorService {
     public void saveProfile(Professor theProfessor);
     public List<Subject> listProfessorSubjects(String email);
     public void addSubject(String email, Subject subject);
-    public List<Thesis> listProfessorTheses(int professor_id);
-    public void assignSubject(String email, Integer applicationId);
+    public List<Thesis> listProfessorTheses(String email);
+    public void assignThesis(Integer applicationId);
+    public void DeclineThesis(Integer applicationId);
+
+    public void addThesis(String currentProfessorUsername, Thesis thesis);
 }

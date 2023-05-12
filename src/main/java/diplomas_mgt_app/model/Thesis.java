@@ -100,4 +100,7 @@ public class Thesis {
                 ", subject=" + subject +
                 '}';
     }
+
+    public void save(Professor professor) {
+    }
 }

@@ -1,6 +1,10 @@
 package diplomas_mgt_app.controller;
 
+import diplomas_mgt_app.model.Application;
 import diplomas_mgt_app.model.Subject;
+import diplomas_mgt_app.model.Thesis;
+import diplomas_mgt_app.service.ApplicationService;
+import diplomas_mgt_app.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,8 +27,17 @@ public class ProfessorController {
     private ProfessorService professorService;
 
     @Autowired
-    public ProfessorController(ProfessorService theProfessorService) {
+    private SubjectService subjectService;
+
+    @Autowired
+    private ApplicationService applicationService;
+
+
+    @Autowired
+    public ProfessorController(ProfessorService theProfessorService,SubjectService theSubjectService,ApplicationService theApplicationService) {
         professorService = theProfessorService;
+        subjectService = theSubjectService;
+        applicationService =theApplicationService;
     }
     // add mapping for "/list"
 
@@ -172,22 +185,72 @@ public class ProfessorController {
         return "redirect:/Professors/listSubjects";
     }
 
-    @RequestMapping("/listApplications")
-    public String listApplications(@RequestParam("subjectId") Integer subjectId, Model model) {
-        // Implement logic here
-        return "";
-    }
-
-    @RequestMapping("/assignSubject")
-    public String assignSubject(@RequestParam("applicationId") Integer applicationId, Model model) {
-        // Implement logic here
-        return "";
-    }
-
     @RequestMapping("/listTheses")
     public String listProfessorTheses(Model model) {
-        // Implement logic here
-        return "";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentProfessorUsername = authentication.getName();
+
+        List<Thesis> theses = professorService.listProfessorTheses(currentProfessorUsername);
+        model.addAttribute("theses", theses);
+
+        return "Professors/list-theses";
+    }
+
+    @RequestMapping("/showThesisForm")
+    public String showThesisForm(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentProfessorUsername = authentication.getName();
+        Professor currentProfessor = professorService.findByUsername(currentProfessorUsername);
+
+        Thesis thesis = new Thesis();
+        thesis.setProfessor(currentProfessor);
+
+        model.addAttribute("thesis", thesis);
+
+        List<Subject> subjects = subjectService.findAll();
+        model.addAttribute("subjects", subjects);
+
+        return "Professors/thesis-form";
+
+    }
+    @RequestMapping(value = "/addThesis", method = RequestMethod.POST)
+    public String addThesis(@ModelAttribute("thesis") Thesis thesis, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentProfessorUsername = authentication.getName();
+
+        Professor currentProfessor = professorService.retrieveProfile(currentProfessorUsername);
+
+        professorService.addThesis(currentProfessorUsername, thesis);
+
+        return "redirect:/Professors/listTheses";
+    }
+
+
+    @RequestMapping("/listApplications")
+    public String listApplications(@RequestParam("thesisId") Integer thesisId, Model model) {
+        List<Application> applications = applicationService.findAllByThesisId(thesisId);
+        model.addAttribute("applications", applications);
+        return "Professors/list-applications";
+    }
+
+    @RequestMapping("/assignThesis")
+    public String assignThesis(@RequestParam("applicationId") Integer applicationId, Model model) {
+        Application application = applicationService.findById(applicationId);
+        if (application != null) {
+            application.setStatus("Accepted");
+            applicationService.save(application);
+        }
+        return "redirect:/Professors/mainMenu";
+    }
+
+    @RequestMapping("/declineThesis")
+    public String declineThesis(@RequestParam("applicationId") Integer applicationId, Model model) {
+        Application application = applicationService.findById(applicationId);
+        if (application != null) {
+            application.setStatus("Declined");
+            applicationService.save(application);
+        }
+        return "redirect:/Professors/mainMenu";
     }
 
 }

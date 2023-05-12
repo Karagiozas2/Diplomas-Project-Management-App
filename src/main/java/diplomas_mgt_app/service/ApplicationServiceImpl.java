@@ -29,4 +29,15 @@ public class ApplicationServiceImpl implements ApplicationService {
     public List<Application> findAll() {
         return applicationDAO.findAll();
     }
+    @Override
+    public List<Application> findAllByThesisId(Integer thesisId) {
+        return applicationDAO.findAllByThesisId(thesisId);
+    }
+
+    @Override
+    @Transactional
+    public Application findById(Integer id) {
+        return applicationDAO.findById(id).orElse(null);
+    }
+
 }

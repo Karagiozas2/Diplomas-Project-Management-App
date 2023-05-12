@@ -10,4 +10,9 @@ public interface ApplicationService {
     void save(Application application);
 
     public List<Application> findAll();
+
+    List<Application> findAllByThesisId(Integer thesisId);
+
+    Application findById(Integer id);
+
 }

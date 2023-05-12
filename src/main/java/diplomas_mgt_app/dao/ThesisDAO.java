@@ -16,6 +16,7 @@ public interface ThesisDAO extends JpaRepository<Thesis, Integer> {
 
     List<Thesis> findByProfessorId(int professor_id);
     List<Thesis> findBySubjectId(int subject_id);
+    void save(Professor theProfessor);
 
     public List<Thesis> findByProfessor(Professor professor);
 }

@@ -32,15 +32,15 @@ public class ProfessorServiceImpl implements ProfessorService {
     public List<Professor> findAll() {
         return professorRepository.findAll();
     }
+
     @Override
     @Transactional
     public Professor findById(int theId) {
         Professor result = professorRepository.findById(theId);
 
-        if (result != null ) {
+        if (result != null) {
             return result;
-        }
-        else {
+        } else {
             // we didn't find the professor
             throw new RuntimeException("Did not find professor id - " + theId);
         }
@@ -73,6 +73,7 @@ public class ProfessorServiceImpl implements ProfessorService {
     public Professor retrieveProfile(String email) {
         return professorRepository.findByEmail(email);
     }
+
     @Override
     @Transactional
     public Professor findByUsername(String username) {
@@ -102,26 +103,53 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     @Transactional
-    public List<Thesis> listProfessorTheses(int professor_id) {
-        Professor professor = professorRepository.findById(professor_id);
-        return thesisDAO.findByProfessorId(professor_id);
+    public List<Thesis> listProfessorTheses(String username) {
+        Professor professor = professorRepository.findByUsername(username);
+        return thesisDAO.findByProfessor(professor);
     }
 
-    @Override
-    public void assignSubject(String email, Integer applicationId) {
 
-    }
-/*
     @Override
     @Transactional
-    public void assignSubject(String email, Integer applicationId) {
-        Application application = applicationDAO.findById(applicationId);
-        Subject subject = application.getSubject();
-        Student student = application.getStudent();
-        Thesis thesis = new Thesis(student, subject);
+    public void addThesis(String email, Thesis thesis) {
+        Professor professor = professorRepository.findByEmail(email);
+        thesis.save(professor);
         thesisDAO.save(thesis);
+
     }
-   TODO after student we remove the comment
-*/
+
+    @Override
+    @Transactional
+    public void assignThesis(Integer applicationId) {
+        Application application = applicationDAO.findById(applicationId).orElse(null);
+
+        if (application != null) {
+            Thesis thesis = application.getThesis();
+            Student student = application.getStudent();
+
+            // Changing the application status to Accepted
+            application.setStatus("Accepted");
+
+            // Saving the changes
+            applicationDAO.save(application);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void DeclineThesis(Integer applicationId) {
+        Application application = applicationDAO.findById(applicationId).orElse(null);
+
+        if (application != null) {
+            Thesis thesis = application.getThesis();
+            Student student = application.getStudent();
+
+            // Changing the application status to Accepted
+            application.setStatus("Declined");
+
+            // Saving the changes
+            applicationDAO.save(application);
+        }
+    }
 }
 

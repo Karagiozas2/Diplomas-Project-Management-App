@@ -10,7 +10,6 @@ public interface ApplicationDAO extends JpaRepository<Application, Integer> {
 
     public Application findById(int theId);
     public List<Application> findAll();
-
     public List<Application> findByStudent(Student student);
-    List<Application> findByThesis(Thesis thesis);
+    List<Application> findAllByThesisId(Integer thesisId);
 }

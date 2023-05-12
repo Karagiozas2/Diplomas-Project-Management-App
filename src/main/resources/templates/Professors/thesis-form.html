@@ -13,20 +13,27 @@
     <!-- Link to Bootstrap CSS in this case -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-    <title>Add Subject</title>
+    <title>Add Thesis</title>
 </head>
 <body>
-<h1>Add Subject</h1>
+<h1>Add Thesis</h1>
 
-<form th:action="@{/Professors/addSubject}" th:object="${subject}" method="post">
+<form th:action="@{/Professors/addThesis}" th:object="${thesis}" method="post">
     <input type="hidden" th:field="*{professor.id}" />
     <div class="form-group">
-        <label for="name">Subject Name</label>
-        <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter subject name" required>
+        <label for="name">Thesis Title</label>
+        <input type="text" class="form-control" id="name" th:field="*{title}" placeholder="Enter thesis name" required>
     </div>
     <div class="form-group">
-        <label for="description">Subject Description</label>
-        <textarea class="form-control" id="description" rows="3" th:field="*{description}" placeholder="Enter subject description" required></textarea>
+        <label for="description">Thesis objectives</label>
+        <textarea class="form-control" id="description" rows="3" th:field="*{objectives}" placeholder="Enter thesis description" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="subject">Subject</label>
+        <select class="form-control" id="subject" th:field="*{subject}" required>
+            <option value="">Choose...</option>
+            <option th:each="subject : ${subjects}" th:value="${subject.id}" th:text="${subject.name}"></option>
+        </select>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
