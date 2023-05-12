@@ -13,6 +13,8 @@ public class BestApplicantStrategyFactory {
             return new BestAvgGradeStrategy();
         } else if (BestApplicantStrategy.equalsIgnoreCase("FewestCourses")) {
             return new FewestCoursesStrategy();
+        } else if (BestApplicantStrategy.equalsIgnoreCase("RandomApplicantStrategy")) {
+            return (diplomas_mgt_app.model.strategies.BestApplicantStrategy) new RandomApplicantStrategy();
         }
 
         return null;
