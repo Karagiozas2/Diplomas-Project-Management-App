@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/Professors")
@@ -29,6 +30,8 @@ public class ProfessorController {
     @Autowired
     private ThesisService thesisService;
 
+    @Autowired
+    private AssignedThesisService assignedThesisService;
 
     @Autowired
     public ProfessorController(ProfessorService theProfessorService,SubjectService theSubjectService,ApplicationService theApplicationService) {
@@ -247,10 +250,28 @@ public class ProfessorController {
         if (application != null) {
             application.setStatus("Accepted");
             applicationService.save(application);
+
+            AssignedThesis assignedThesis = new AssignedThesis();
+            assignedThesis.setTitle(application.getThesis().getTitle());
+            assignedThesis.setStudent(application.getStudent());
+            assignedThesis.setProfessor(application.getThesis().getProfessor());
+            assignedThesis.setImplementationgrade(0.0);
+            assignedThesis.setReportgrade(0.0);
+            assignedThesis.setPresentationgrade(0.0);
+            assignedThesis.setTotalgrade(0.0);
+
+            assignedThesisService.save(assignedThesis);
         }
         return "redirect:/Professors/mainMenu";
     }
+    @RequestMapping("/assignedTheseslist")
+    public String listAssignedThesesList(Model model) {
+        List<AssignedThesis> assignedTheses = assignedThesisService.findAll();
 
+        model.addAttribute("assignedTheses", assignedTheses);
+
+        return "Professors/list-assignedtheses";
+    }
     @RequestMapping("/declineThesis")
     public String declineThesis(@RequestParam("applicationId") Integer applicationId, Model model) {
         Application application = applicationService.findById(applicationId);
@@ -260,7 +281,85 @@ public class ProfessorController {
         }
         return "redirect:/Professors/mainMenu";
     }
+    @RequestMapping(value = "/addGrade/implementation", method = RequestMethod.GET)
+    public String showAddImplementationGradeForm(@RequestParam("id") Integer id, Model model) {
 
+        AssignedThesis assignedThesis = assignedThesisService.findById(id);
+        model.addAttribute("assignedThesis", assignedThesis);
+
+        return "Professors/implementationGradeForm";
+    }
+
+    @RequestMapping(value = "/addGrade/implementation/save", method = RequestMethod.POST)
+    public String saveImplementationGrade(@RequestParam("id") Integer id, @RequestParam("grade") Double grade,Model model) {
+        AssignedThesis assignedThesis = assignedThesisService.findById(id);
+        assignedThesis.setImplementationgrade(grade);
+        assignedThesisService.save(assignedThesis);
+
+        List<AssignedThesis> assignedTheses = assignedThesisService.findAll();
+        model.addAttribute("assignedTheses", assignedTheses);
+        return "Professors/list-assignedtheses";
+    }
+    @RequestMapping(value = "/addGrade/report", method = RequestMethod.GET)
+    public String showAddReportGradeForm(@RequestParam("id") Integer id, Model model) {
+
+        AssignedThesis assignedThesis = assignedThesisService.findById(id);
+        model.addAttribute("assignedThesis", assignedThesis);
+
+        return "Professors/reportGradeForm";
+    }
+
+
+    @RequestMapping(value = "/addGrade/report/save", method = RequestMethod.POST)
+    public String saveReportGrade(@RequestParam("id") Integer id, @RequestParam("grade") Double grade,Model model) {
+        AssignedThesis assignedThesis = assignedThesisService.findById(id);
+        assignedThesis.setReportgrade(grade);
+        assignedThesisService.save(assignedThesis);
+
+        List<AssignedThesis> assignedTheses = assignedThesisService.findAll();
+        model.addAttribute("assignedTheses", assignedTheses);
+        return "Professors/list-assignedtheses";
+    }
+
+    @RequestMapping(value = "/addGrade/presentation", method = RequestMethod.GET)
+    public String showAddPresentationGradeForm(@RequestParam("id") Integer id, Model model) {
+
+        AssignedThesis assignedThesis = assignedThesisService.findById(id);
+        model.addAttribute("assignedThesis", assignedThesis);
+
+        return "Professors/presentationGradeForm";
+    }
+
+
+    @RequestMapping(value = "/addGrade/presentation/save", method = RequestMethod.POST)
+    public String savePresentationGrade(@RequestParam("id") Integer id, @RequestParam("grade") Double grade,Model model) {
+        AssignedThesis assignedThesis = assignedThesisService.findById(id);
+        assignedThesis.setPresentationgrade(grade);
+        assignedThesisService.save(assignedThesis);
+
+        List<AssignedThesis> assignedTheses = assignedThesisService.findAll();
+        model.addAttribute("assignedTheses", assignedTheses);
+        return "Professors/list-assignedtheses";
+    }
+
+
+    @RequestMapping(value = "/calculateGrade", method = RequestMethod.GET)
+    public String CalculateGrade(@RequestParam("id") Integer id, Model model) {
+
+        AssignedThesis assignedThesis = assignedThesisService.findById(id);
+        double implementationGrade = assignedThesis.getImplementationgrade();
+        double reportGrade = assignedThesis.getReportgrade();
+        double presentationgrade = assignedThesis.getPresentationgrade();
+        double totalgrade = 0.7 * implementationGrade + 0.15 * presentationgrade + 0.15 * reportGrade;
+        assignedThesis.setTotalgrade(totalgrade);
+
+        assignedThesisService.save(assignedThesis);
+
+        List<AssignedThesis> assignedTheses = assignedThesisService.findAll();
+        model.addAttribute("assignedTheses", assignedTheses);
+
+        return "Professors/list-assignedtheses";
+    }
 
     @PostMapping("/selectStrategy")
     public String selectStrategy(@RequestParam("strategy") String strategy, @RequestParam("thesisId") Integer thesisId, Model model) {

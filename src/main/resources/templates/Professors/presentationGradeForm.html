@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+
+    <!-- Set the Character set for the page -->
+    <meta charset="utf-8">
+
+    <!-- Let the page adapt to client device -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Link to external resource (css, search, etc.) -->
+    <!-- Link to Bootstrap CSS in this case -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Add Presentation Grade</title>
+</head>
+<body>
+<h1>Add Presentation Grade</h1>
+<form th:action="@{/Professors/addGrade/presentation/save}" th:object="${assignedThesis}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <div class="form-group">
+        <label for="presentation_grade">Grade</label>
+        <input type="number" min="0" max="10" step="0.1" name="grade" class="form-control" id="presentation_grade" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<a href="#" th:href="@{/Professors/mainMenu}" class="btn btn-info btn-sm">Back to Main Menu</a>
+</body>
+</html>

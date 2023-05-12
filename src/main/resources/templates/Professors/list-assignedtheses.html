@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:font-size="http://www.w3.org/1999/xhtml"
+      xmlns:width="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Required meta tags -->
+
+    <!-- Set the Character set for the page -->
+    <meta charset="utf-8">
+
+    <!-- Let the page adapt to client device -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Link to external resource (css, search, etc.) -->
+    <!-- Link to Bootstrap CSS in this case -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Assigned Theses List</title>
+</head>
+<body>
+<h1>Assigned Theses List</h1>
+
+
+
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th>Title</th>
+        <th>Student</th>
+        <th>Professor</th>
+        <th>Implementation Grade</th>
+        <th>Report Grade</th>
+        <th>Presentation Grade</th>
+        <th>Total Grade</th>
+        <th>Actions</th>
+    </tr>
+
+    </thead>
+    <tbody>
+    <tr th:each="assignedThesis : ${assignedTheses}">
+        <td th:text="${assignedThesis.title}"></td>
+        <td th:text="${assignedThesis.student.firstName + ' ' + assignedThesis.student.lastName}"></td>
+        <td th:text="${assignedThesis.professor.firstName + ' ' + assignedThesis.professor.lastName}"></td>
+        <td th:text="${assignedThesis.implementationgrade}"></td>
+        <td th:text="${assignedThesis.reportgrade}"></td>
+        <td th:text="${assignedThesis.presentationgrade}"></td>
+        <td th:text="${assignedThesis.totalgrade}"></td>
+        <td font-size: 14px;>
+            <a th:href="@{'/Professors/addGrade/implementation?id=' + ${assignedThesis.id}}" class="btn btn-primary">Add Implementation Grade</a>
+
+            <a th:href="@{'/Professors/addGrade/report?id=' + ${assignedThesis.id}}" class="btn btn-primary">Add Report Grade</a>
+            <br>
+            <a th:href="@{'/Professors/addGrade/presentation?id=' + ${assignedThesis.id}}" class="btn btn-primary">Add Presentation Grade</a>
+
+            <a th:href="@{'/Professors/calculateGrade?id=' + ${assignedThesis.id}}" class="btn btn-primary">Calculate Grade</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="#" th:href="@{/Professors/mainMenu}" class="btn btn-info btn-sm">Back to Main Menu</a>
+</body>
+</html>
