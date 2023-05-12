@@ -13,4 +13,6 @@ public interface ThesisService {
     List<Thesis> findBySubjectId(int subject_id);
 
     List<Thesis> findByProfessor(Professor professor);
+
+    public void delete(int id);
 }

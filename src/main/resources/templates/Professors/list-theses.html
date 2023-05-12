@@ -33,6 +33,8 @@
         <th>Professor</th>
         <th>Subject</th>
         <th>Applications</th>
+        <th>Actions</th>
+
 
     </tr>
     </thead>
@@ -46,6 +48,8 @@
         <td>
             <a th:href="@{/Professors/listApplications(thesisId=${thesis.id})}">
                 View Applications</a>
+        </td>
+        <td><a th:href="@{/Professors/deleteThesis(thesisId=${thesis.id})}">Delete</a>
         </td>
     </tr>
     </tbody>

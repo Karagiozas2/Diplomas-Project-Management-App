@@ -3,15 +3,13 @@ package diplomas_mgt_app.controller;
 import diplomas_mgt_app.model.*;
 import diplomas_mgt_app.model.strategies.BestApplicantStrategy;
 import diplomas_mgt_app.model.strategies.BestApplicantStrategyFactory;
-import diplomas_mgt_app.service.ApplicationService;
-import diplomas_mgt_app.service.SubjectService;
+import diplomas_mgt_app.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import diplomas_mgt_app.service.ProfessorService;
 
 import java.util.List;
 
@@ -27,6 +25,9 @@ public class ProfessorController {
 
     @Autowired
     private ApplicationService applicationService;
+
+    @Autowired
+    private ThesisService thesisService;
 
 
     @Autowired
@@ -217,6 +218,16 @@ public class ProfessorController {
         Professor currentProfessor = professorService.retrieveProfile(currentProfessorUsername);
 
         professorService.addThesis(currentProfessorUsername, thesis);
+
+        return "redirect:/Professors/listTheses";
+    }
+
+    @RequestMapping(value = "/deleteThesis")
+    public String deleteThesis(@RequestParam("thesisId") Integer thesisId, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentProfessorUsername = authentication.getName();
+
+        thesisService.delete(thesisId);
 
         return "redirect:/Professors/listTheses";
     }

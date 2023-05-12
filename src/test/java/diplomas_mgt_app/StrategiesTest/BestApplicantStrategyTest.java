@@ -1,4 +1,4 @@
-package diplomas_mgt_app;
+package diplomas_mgt_app.StrategiesTest;
 
 import diplomas_mgt_app.model.*;
 import diplomas_mgt_app.model.strategies.BestAvgGradeStrategy;
