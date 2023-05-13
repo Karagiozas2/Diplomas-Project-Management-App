@@ -35,7 +35,9 @@
         <td th:text="${applications.thesis.title}"></td>
         <td th:text="${applications.thesis.subject.name}"></td>
         <td th:text="${applications.thesis.subject.description}"></td>
-        <td th:text="${applications.status}"></td>
+        <td class="text-success" th:if="${applications.status =='Accepted'}"><span th:text="${applications.status}"></span></td>
+        <td class="text-danger" th:if="${applications.status =='Declined'}"><span th:text="${applications.status}"></span></td>
+        <td class="text-warning" th:unless="${applications.status =='Declined'||applications.status =='Accepted'}"><span th:text="${applications.status}"></span></td>
     </tr>
     </tbody>
 </table>
