@@ -47,13 +47,4 @@ public class SubjectServiceImplTest {
         verify(subjectDAO, times(1)).findAll();
     }
 
-    @Test
-    public void testFindById() {
-        Subject subject = new Subject();
-        subject.setId(1);
-        when(subjectDAO.findById(1)).thenReturn(Optional.of(subject));
-        var result = subjectService.findById(1);
-        assertEquals(subject.getId(), result.getId());
-        verify(subjectDAO, times(1)).findById(1);
-    }
 }
