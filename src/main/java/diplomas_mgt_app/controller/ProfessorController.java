@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -249,7 +250,7 @@ public class ProfessorController {
     @RequestMapping("/assignThesis")
     public String assignThesis(@RequestParam("applicationId") Integer applicationId, Model model) {
         Application application = applicationService.findById(applicationId);
-        if (application != null) {
+        if (application != null && Objects.equals(application.getStatus(), "pending")) {
             application.setStatus("Accepted");
             applicationService.save(application);
 
@@ -278,7 +279,7 @@ public class ProfessorController {
     @RequestMapping("/declineThesis")
     public String declineThesis(@RequestParam("applicationId") Integer applicationId, Model model) {
         Application application = applicationService.findById(applicationId);
-        if (application != null) {
+        if (application != null && Objects.equals(application.getStatus(), "pending")) {
             application.setStatus("Declined");
             applicationService.save(application);
         }
