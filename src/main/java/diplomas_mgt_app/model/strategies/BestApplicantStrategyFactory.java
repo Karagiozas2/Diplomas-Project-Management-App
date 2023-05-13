@@ -15,6 +15,8 @@ public class BestApplicantStrategyFactory {
             return new FewestCoursesStrategy();
         } else if (BestApplicantStrategy.equalsIgnoreCase("RandomApplicantStrategy")) {
             return (diplomas_mgt_app.model.strategies.BestApplicantStrategy) new RandomApplicantStrategy();
+        }else if (BestApplicantStrategy.equalsIgnoreCase("ThresholdApplicantStrategy")) {
+            return (diplomas_mgt_app.model.strategies.BestApplicantStrategy) new ThresholdApplicantStrategy();
         }
 
         return null;
