@@ -29,6 +29,18 @@ public class Subject {
 
     }
 
+    public Subject(int id, Professor professor) {
+        this.id = id;
+        this.professor = professor;
+    }
+
+    public Subject(int id, String name, String description, Professor professor) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.professor = professor;
+    }
+
     public Subject(int id, String name, String description, List<Thesis> theses) {
         this.id = id;
         this.name = name;
