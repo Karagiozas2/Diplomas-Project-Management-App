@@ -15,34 +15,106 @@
 
     <title>Professor Main Menu</title>
 </head>
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; position: fixed; left: 0; height: 100vh;">
+    <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <span class="fs-4">Professor Main Menu</span>
+    </a>
+    <hr>
+    <br>
+    <br>
+    <br>
+    <br>
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+            <a href="#" th:href="@{/Professors/listSubjects}" class="nav-link text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                </svg> &nbsp;&nbsp; Subjects List
+            </a>
+        </li><br>
+        <li>
+            <a href="#" th:href="@{/Professors/listTheses}" class="nav-link text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                </svg></i> &nbsp;&nbsp;  Theses List
+            </a>
+        </li><br>
+        <li>
+            <a href="#" th:href="@{/Professors/assignedTheseslist(id=${professor.id})}" class="nav-link text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                </svg></i>&nbsp;&nbsp;Assigned Theses List
+            </a>
+        </li>
+    </ul>
+    <hr>
+</div>
+<body style="width: 800px;  position: fixed; left: 400px; height: 200vh; ">
+<br>
+<br>
+<br>
+<h1></h1>
+    <div class="container bootstrap snippets bootdey">
+        <div class="col-md-6">
+            <strong>Profile Information</strong><br>
+            <div class="table-responsive">
+                <table class="table table-user-information">
+                    <tbody>
+                    <tr>
+                        <td>
 
-<body>
-<h1>Professor Main Menu</h1>
+                            <strong><span class="glyphicon glyphicon-user  text-primary"></span>First Name:</strong>
+                        </td>
+                        <td>
+                            <span th:text="${professor.firstName}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="glyphicon glyphicon-user  text-primary"></span>
+                            <strong>Last Name:</strong>
+                        </td>
+                        <td>
+                            <span th:text="${professor.lastName}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="glyphicon glyphicon-envelope text-primary"></span>
+                            <strong>Email:</strong>
+                        </td>
+                        <td><span th:text="${professor.email}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                            <strong>Specialty:</strong>
+                        </td>
+                        <td><span th:text="${professor.specialty}"></span>
+                        </td>
+                    </tr>
 
-<p>First Name: <span th:text="${professor.firstName}"></span></p>
-
-<p>Last Name: <span th:text="${professor.lastName}"></span></p>
-
-<p>Email: <span th:text="${professor.email}"></span></p>
-
-<p>Specialty: <span th:text="${professor.specialty}"></span></p>
-
-<p>username: <span th:text="${professor.username}"></span></p>
-
-
-<a th:href="@{/Professors/showFormForUpdate(professorId=${professor.id})}"
-   class="btn btn-info btn-sm">
-    Update
-</a>
-
-<a href="#" th:href="@{/Professors/listSubjects}" class="btn btn-info btn-sm">Subjects List</a>
-
-<a href="#" th:href="@{/Professors/listTheses}"
-   class="btn btn-info btn-sm">
-    Theses List</a>
-
-<a href="#" th:href="@{/Professors/assignedTheseslist(id=${professor.id})}"
-   class="btn btn-info btn-sm">
-    Assigned Theses List</a>
+                    <tr>
+                        <td>
+                            <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                            <strong>username:</strong>
+                        </td>
+                        <td><span th:text="${professor.username}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a th:href="@{/Professors/showFormForUpdate(professorId=${professor.id})}"
+                               class="btn btn-info btn-sm">
+                                Update Information
+                            </a>
+                        </td><td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

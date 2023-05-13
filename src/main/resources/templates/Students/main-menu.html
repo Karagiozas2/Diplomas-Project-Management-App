@@ -15,31 +15,109 @@
 
     <title>Student Main Menu</title>
 </head>
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; position: fixed; left: 0; height: 100vh;">
+    <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <span class="fs-4">Student Main Menu</span>
+    </a>
+    <hr>
+    <br>
+    <br>
+    <br>
+    <br>
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
 
-<body>
-<h1>Student Main Menu</h1>
+            <a href="#" th:href="@{/Students/listSubjects}" class="nav-link text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                </svg> &nbsp;&nbsp; Subjects List
+            </a>
+        </li><br>
+        <li>
+            <a href="#" th:href="@{'/Students/listApplications/' + ${student.id}}" class="nav-link text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                </svg></i> &nbsp;&nbsp; Current Applications
+            </a>
+        </li>
+    </ul>
+    <hr>
+</div>
+<body style="width: 800px;  position: fixed; left: 400px; height: 200vh; ">
+<br>
+<br>
+<br>
+<div class="container bootstrap snippets bootdey">
+    <div class="col-md-6">
+        <strong>Profile Information</strong><br>
+        <div class="table-responsive">
+            <table class="table table-user-information">
+                <tbody>
+                <tr>
+                    <td>
 
-<p>First Name: <span th:text="${student.firstName}"></span></p>
+                        <strong><span class="glyphicon glyphicon-user  text-primary"></span>First Name:</strong>
+                    </td>
+                    <td>
+                        <span th:text="${student.firstName}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="glyphicon glyphicon-user  text-primary"></span>
+                        <strong>Last Name:</strong>
+                    </td>
+                    <td>
+                        <span th:text="${student.lastName}"></span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="glyphicon glyphicon-envelope text-primary"></span>
+                        <strong>Email:</strong>
+                    </td>
+                    <td><span th:text="${student.email}"></span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                        <strong>Year Of Studies:</strong>
+                    </td>
+                    <td><span th:text="${student.yearofstudies}"></span>
+                    </td>
+                </tr>
 
-<p>Last Name: <span th:text="${student.lastName}"></span></p>
+                <tr>
+                    <td>
+                        <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                        <strong>Current Average Grade:</strong>
+                    </td>
+                    <td>
+                        <span th:text="${student.currentaveragegrade}"></span>
+                    </td>
+                </tr>
 
-<p>Email: <span th:text="${student.email}"></span></p>
-
-<p>Year of Studies: <span th:text="${student.yearofstudies}"></span></p>
-
-<p>Current Average Grade: <span th:text="${student.currentaveragegrade}"></span></p>
-
-<p>Number Of Remaining Courses For Graduation: <span th:text="${student.numberofremainingcoursesforgraduation}"></span></p>
-
-<p>username: <span th:text="${student.username}"></span></p>
-
-
-
-<a href="#" th:href="@{/Students/listSubjects}" class="btn btn-info btn-sm">Subjects List</a>
-
-<a href="#" th:href="@{'/Students/listApplications/' + ${student.id}}"
-   class="btn btn-info btn-sm">
-    Current Applications</a>
-
+                <tr>
+                    <td>
+                        <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                        <strong>Number Of Remaining Courses For Graduation:</strong>
+                    </td>
+                    <td>
+                        <span th:text="${student.numberofremainingcoursesforgraduation}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                        <strong>username:</strong>
+                    </td>
+                    <td><span th:text="${student.username}"></span></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>

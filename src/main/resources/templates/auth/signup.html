@@ -12,57 +12,63 @@
     <!-- Font Awesome icons -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="/static/css/demo.css">
 
     <title>Register</title>
 </head>
+</head><section class="vh-100" style="background-color: #FFFFFF;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                            <img src="https://i.postimg.cc/qvcy4Rq4/uoi-logo-black-h5000.png"
+                                 class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                        </div>
+                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">
 
-<body>
+                                <form th:action="@{/save}" th:object="${user}" method="post">
 
-<div class="container">
-    <div class="screen">
-        <div class="screen__content">
+                                    <div class="d-flex align-items-center mb-3 pb-1">
+                                        <span class="h1 fw-bold mb-0">Register</span>
+                                    </div>
 
-            <!-- Registration form -->
-            <form th:action="@{/save}" th:object="${user}" method="post">
-                <h3>Registration</h3>
-                <div class="login__field">
-                    <i class="login__icon fas fa-user"></i>
-                    <input type="text" class="login__input" th:field="*{username}" placeholder="User Name" />
+                                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Create New Account</h5>
+
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="form2Example17" class="form-control form-control-lg" th:field="*{username}" placeholder="User Name" />
+                                        <label class="form-label" for="form2Example17">User Name</label>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <input type="password" id="form2Example27" class="form-control form-control-lg" th:field="*{password}" placeholder="Password" />
+                                        <label class="form-label" for="form2Example27">Password</label>
+                                    </div>
+
+                                    <div class="form-outline">
+                                        <select class="form-control form-control-lg" th:field="*{role}" required>
+                                            <option value="Professor">Professor</option>
+                                            <option value="Student">Student</option>
+                                        </select><label class="form-label" for="form2Example27">Role</label>
+                                    </div>
+
+                                    <div class="pt-1 mb-4">
+                                        <button class="btn btn-dark btn-lg btn-block" type="Submit">Register</button>
+                                    </div>
+
+                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Already have an account? <a th:href="@{/login}"
+                                                                                                              style="color: #393f81;">Sign In</a></p>
+                                </form>
+                                <div th:if="${param.error}"><p>Registration Error.</p></div> <br/>
+
+                                <span th:utext="${successMessage}"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="login__field">
-                    <i class="login__icon fas fa-lock"></i>
-                    <input type="password" class="login__input" th:field="*{password}" placeholder="Password" />
-                </div>
-                <div class="login__field">
-                    <select class="login__input" th:field="*{role}" required>
-                        <option value="">Select</option>
-                        <option value="Professor">Professor</option>
-                        <option value="Student">Student</option>
-                    </select>
-                </div>
-                <button type="submit" class="button login__submit">
-                    <span class="button__text">Register</span>
-                    <i class="button__icon fas fa-chevron-right"></i>
-                </button>
-                <button class="button login__submit">
-                    <a th:href="@{/login}" > Login</a>
-                </button>
-
-                <div th:if="${param.error}"><p>Registration Error.</p></div> <br/>
-
-                <span th:utext="${successMessage}"></span>
-            </form>
-
-        </div>
-        <div class="screen__background">
-            <span class="screen__background__shape screen__background__shape4"></span>
-            <span class="screen__background__shape screen__background__shape3"></span>
-            <span class="screen__background__shape screen__background__shape2"></span>
-            <span class="screen__background__shape screen__background__shape1"></span>
+            </div>
         </div>
     </div>
-</div>
-
-</body>
+</section>
 </html>

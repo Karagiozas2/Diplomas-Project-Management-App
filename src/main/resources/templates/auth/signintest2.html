@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    <title>Login</title>
+<body>
+
+<div class="d-flex justify-content-center flex-md-row flex-column mdc-card mdc-card-content card flex-grow-1">
+    <section id="loginForm" class="login-section login-form card-body">
+        <div class="d-flex flex-column justify-content-between m-auto">
+            <div class="form-wrapper">
+                <form th:action="@{/login}" id="fm1" method="POST">
+                    <h3 th:text="Login"></h3>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-user"></i>
+                        <input type="text" class="login__input" name="username" th:placeholder="Username" />
+                    </div>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-lock"></i>
+                        <input type="password" class="login__input" th:placeholder="Password" name="password" />
+                    </div>
+                    <button type="Submit" class="button login__submit">
+                        <span class="button__text">Log In Now</span>
+                        <i class="button__icon fas fa-chevron-right"></i>
+                    </button>
+                    <a th:href="@{register}" class="button login__submit">
+                        <span class="button__text">Register</span>
+                        <i class="button__icon fas fa-chevron-right"></i>
+                    </a></button>
+                </form>
+            </div>
+        </div>
+        <div th:if="${param.error}"><p>Username or Password is invalid.</p>
+        </div>
+        <br/>
+
+        <span th:utext="${successMessage}"></span>
+
+    </section>
+</div>
+</body>
+</html>
