@@ -50,13 +50,13 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public List<Student> findAll() {
-        return studentRepository.findAll();
+        return studentDAO.findAll();
     }
 
     @Override
     @Transactional
     public Student findByUsername(String username) {
-        return studentRepository.findByUsername(username);
+        return studentDAO.findByUsername(username);
     }
 
     @Override

@@ -12,37 +12,26 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/login}">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/register}">Register</a>
-            </li>
-        </ul>
-    </div>
 </nav>
 
 <div class="container mt-5">
-    <h1>Welcome to Diplomas Management App</h1>
-    <p>Manage your Thesis easily with our app.</p>
+    <h1>Welcome to Subject Thesis Management App</h1>
     <div class="row mt-5">
         <div class="col-md-6">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h3 class="card-title">Student List</h3>
+                    <h3 class="card-title">Welcome Back</h3>
                     <p class="card-text"></p>
-                    <a href="#" th:href="@{/Students/list-students}" class="btn btn-primary btn-lg">Go to List</a>
+                    <a href="#" th:href="@{/login}" class="btn btn-primary btn-lg">Login</a>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h3 class="card-title">Professor List</h3>
+                    <h3 class="card-title">New User?</h3>
                     <p class="card-text"></p>
-                    <a href="#" th:href="@{Professors/list-professors}" class="btn btn-primary btn-lg">Go to List</a>
+                    <a href="#" th:href="@{/register}" class="btn btn-primary btn-lg">Register</a>
                 </div>
             </div>
         </div>

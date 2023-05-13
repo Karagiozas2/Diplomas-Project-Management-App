@@ -16,5 +16,4 @@ public interface AssignedThesisDAO extends JpaRepository<AssignedThesis, Integer
     List<AssignedThesis> findByStudentId(int student_id);
     List<AssignedThesis> findByProfessorId(int professor_id);
     public List<AssignedThesis> findByStudent(Student student);
-    public List<AssignedThesis> findByProfessor(Professor professor);
 }

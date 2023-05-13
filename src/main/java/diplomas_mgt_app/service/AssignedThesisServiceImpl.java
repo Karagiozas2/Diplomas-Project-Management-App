@@ -36,7 +36,11 @@ public class AssignedThesisServiceImpl implements AssignedThesisService {
             // we didn't find the professor
             throw new RuntimeException("Did not find AssignedThesis id - " + theId);
         } }
-
+@Override
+@Transactional
+    public List<AssignedThesis> findbyProfessorId(Integer professorId){
+    return assignedThesisDAO.findByProfessorId(professorId);
+}
     @Override
     @Transactional
     public List<AssignedThesis> findAll() {

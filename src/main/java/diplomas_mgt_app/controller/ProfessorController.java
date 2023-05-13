@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 
@@ -265,8 +267,9 @@ public class ProfessorController {
         return "redirect:/Professors/mainMenu";
     }
     @RequestMapping("/assignedTheseslist")
-    public String listAssignedThesesList(Model model) {
-        List<AssignedThesis> assignedTheses = assignedThesisService.findAll();
+    public String listAssignedThesesList(@RequestParam("id") Integer professorId,Model model) {
+
+        List<AssignedThesis> assignedTheses = assignedThesisService.findbyProfessorId(professorId);
 
         model.addAttribute("assignedTheses", assignedTheses);
 
@@ -351,6 +354,10 @@ public class ProfessorController {
         double reportGrade = assignedThesis.getReportgrade();
         double presentationgrade = assignedThesis.getPresentationgrade();
         double totalgrade = 0.7 * implementationGrade + 0.15 * presentationgrade + 0.15 * reportGrade;
+        BigDecimal bd = new BigDecimal(Double.toString(totalgrade));
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        totalgrade = bd.doubleValue();
+
         assignedThesis.setTotalgrade(totalgrade);
 
         assignedThesisService.save(assignedThesis);
