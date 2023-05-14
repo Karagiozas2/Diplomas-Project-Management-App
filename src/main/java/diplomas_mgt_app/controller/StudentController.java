@@ -43,10 +43,8 @@ import java.util.List;
     @RequestMapping("/list-students")
     public String listStudents(Model theModel) {
 
-        // get student from db
         List<Student> theStudents = studentService.findAll();
 
-        // add to the spring model
         theModel.addAttribute("students", theStudents);
 
         return "Students/list-students";
@@ -54,15 +52,6 @@ import java.util.List;
 
     @RequestMapping("/save")
     public String saveStudent(@ModelAttribute("student") Student theStudent){
-        /*
-         *  @ModelAttribute("student") -  this is how to get
-         *  a reference to the object holding the data entered
-         *  in a form.
-         *  https://docs.spring.io/spring-framework/docs/3.0.x/spring-framework-reference/html/mvc.html#mvc-ann-modelattrib
-         *
-         */
-
-        // save the professor
         studentService.saveProfile(theStudent);
 
         return "auth/signin";
@@ -73,13 +62,10 @@ import java.util.List;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentStudentUsername = authentication.getName();
 
-        // Fetch the professor using the username
         Student currentStudent = studentService.findByUsername(currentStudentUsername);
 
-        // Add the professor to the model
         model.addAttribute("student", currentStudent);
 
-        // Redirect to the main menu view
         return "Students/main-menu";
     }
 
