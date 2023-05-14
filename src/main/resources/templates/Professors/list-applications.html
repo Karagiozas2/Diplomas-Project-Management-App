@@ -46,14 +46,14 @@
 </table>
 
 <table>
-<form action="#" th:action="@{/Professors/selectStrategy}" method="post">
-    <select name="strategy">
-        <option value="BestAvgGrade">Best Average Grade</option>
-        <option value="FewestCourses">Fewest Courses</option>
-    </select>
-    <input type="hidden" name="thesisId" th:value="${thesisId}" />
-    <button type="submit">Select Strategy</button>
-</form>
+    <form th:action="@{/Professors/selectStrategy}" method="post">
+        <input type="hidden" name="thesisId" th:value="${thesisId}" />
+
+        <button type="submit" name="strategy" value="BestAvgGrade">Best Average Grade</button>
+        <button type="submit" name="strategy" value="FewestCourses">Fewest Courses</button>
+        <button type="submit" name="strategy" value="RandomApplicantStrategy">Random Applicant</button>
+        <button type="submit" name="strategy" value="ThresholdApplicantStrategy">Threshold Applicant</button>
+    </form>
 </table>
 
 <div th:if="${bestStudent != null}">

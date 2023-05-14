@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -246,7 +247,6 @@ public class ProfessorController {
         model.addAttribute("thesisId", thesisId);
         return "Professors/list-applications";
     }
-
     @RequestMapping("/assignThesis")
     public String assignThesis(@RequestParam("applicationId") Integer applicationId, Model model) {
         Application application = applicationService.findById(applicationId);
@@ -369,17 +369,39 @@ public class ProfessorController {
         return "Professors/list-assignedtheses";
     }
 
-    @PostMapping("/selectStrategy")
-    public String selectStrategy(@RequestParam("strategy") String strategy, @RequestParam("thesisId") Integer thesisId, Model model) {
+    @RequestMapping (value = "/selectStrategy", method = RequestMethod.POST)
+    public String selectStrategy(@RequestParam("strategy") String strategy, @RequestParam("thesisId") Integer thesisId, Model model, RedirectAttributes redirectAttributes) {
+        if ("ThresholdApplicantStrategy".equals(strategy)) {
+            redirectAttributes.addAttribute("thesisId", thesisId);
+            return "redirect:/Professors/inputThresholds";
+        }
         BestApplicantStrategyFactory factory = new BestApplicantStrategyFactory();
         BestApplicantStrategy bestApplicantStrategy = factory.createStrategy(strategy);
 
         List<Application> applications = applicationService.findAllByThesisId(thesisId);
         Student bestStudent = bestApplicantStrategy.findBestApplicant(applications);
 
-        model.addAttribute("bestStudent", bestStudent);
+        redirectAttributes.addFlashAttribute("bestStudent", bestStudent);
 
         return "redirect:/Professors/listApplications?thesisId=" + thesisId;
     }
 
+    @RequestMapping("/inputThresholds")
+    public String inputThresholds(@RequestParam("thesisId") Integer thesisId, Model model) {
+        model.addAttribute("thesisId", thesisId);
+        return "Professors/input-thresholds";
+    }
+
+    @RequestMapping(value = "/processThresholds", method = RequestMethod.POST)
+    public String processThresholds(@RequestParam("th1") double th1, @RequestParam("th2") double th2, @RequestParam("thesisId") Integer thesisId, Model model, RedirectAttributes redirectAttributes) {
+        BestApplicantStrategyFactory factory = new BestApplicantStrategyFactory();
+        BestApplicantStrategy bestApplicantStrategy = factory.createThresholdStrategy(th1, th2);
+
+        List<Application> applications = applicationService.findAllByThesisId(thesisId);
+        Student bestStudent = bestApplicantStrategy.findBestApplicant(applications);
+
+        redirectAttributes.addFlashAttribute("bestStudent", bestStudent);
+
+        return "redirect:/Professors/listApplications?thesisId=" + thesisId;
+    }
 }

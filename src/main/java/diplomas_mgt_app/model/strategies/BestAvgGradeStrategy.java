@@ -14,9 +14,18 @@ public class BestAvgGradeStrategy extends TemplateStrategyAlgorithm {
 
     @Override
     public Student findBestApplicant(List<Application> applications) {
-        return applications.stream()
-                .max(this::compareApplications) // Use compareApplications here.
-                .map(Application::getStudent)
-                .orElse(null);
+        if (applications == null || applications.isEmpty()) {
+            return null;
+        }
+
+        Application bestApplication = applications.get(0);
+
+        for (Application application : applications) {
+            if (compareApplications(bestApplication, application) < 0) {
+                bestApplication = application;
+            }
+        }
+
+        return bestApplication.getStudent();
     }
 }

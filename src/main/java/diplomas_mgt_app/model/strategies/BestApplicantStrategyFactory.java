@@ -4,6 +4,10 @@ public class BestApplicantStrategyFactory {
     public BestApplicantStrategyFactory() {
     }
 
+    public BestApplicantStrategy createThresholdStrategy(double th1, double th2) {
+        return new ThresholdApplicantStrategy(th1, th2);
+    }
+
     public BestApplicantStrategy createStrategy(String BestApplicantStrategy) {
         if (BestApplicantStrategy == null) {
             return null;
@@ -14,9 +18,9 @@ public class BestApplicantStrategyFactory {
         } else if (BestApplicantStrategy.equalsIgnoreCase("FewestCourses")) {
             return new FewestCoursesStrategy();
         } else if (BestApplicantStrategy.equalsIgnoreCase("RandomApplicantStrategy")) {
-            return (diplomas_mgt_app.model.strategies.BestApplicantStrategy) new RandomApplicantStrategy();
+            return new RandomApplicantStrategy();
         }else if (BestApplicantStrategy.equalsIgnoreCase("ThresholdApplicantStrategy")) {
-            return (diplomas_mgt_app.model.strategies.BestApplicantStrategy) new ThresholdApplicantStrategy();
+            return new ThresholdApplicantStrategy();
         }
 
         return null;
