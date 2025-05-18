@@ -1,6 +1,6 @@
 ﻿# Diplomas-Project-Management-App
 
-A thesis management platform for academic institutions. Built using Java
+A thesis management platform for academic institutions. Built using Java.
 
 Features:
 - Login system (students, professors)
@@ -12,4 +12,6 @@ Features:
 Technologies:
 - Java (JDK 8+)
 - MySQL
+- Maven
+- Springboot Application
   
